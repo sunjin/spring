@@ -1,11 +1,22 @@
 $(document).ready(function(){
+	//숫자만체크
+	$("input").on("keypress", function(event){
+		if (event.which && (event.which > 47 && event.which < 58 || event.which == 8)) { 
+        } else { 
+        	alert("숫자만입력!!");
+        	$(this).val("");
+            event.preventDefault(); 
+        } 
+	});
 	
+	//버튼클릭시
 	$("#start").on("click", function(){
 		var x = $("#x").val();
 		var y = $("#y").val();
 		makeTable(x,y);
 	});
 	
+	//이벤트발생
 	$("#table").on("click", ".gameTd", function(){
 		if( $(this).hasClass("current")){
 			alert("여긴아니야"); 
@@ -14,12 +25,14 @@ $(document).ready(function(){
 		var xData = $(this).attr("xData");
 		var yData = $(this).attr("yData");
 		
+		//체크
 		check(xData,yData,$(this));
 	
 	})
 	
 });
 
+//테이블그리기
 function makeTable(x,y){
 
 	var x = parseInt(x);
@@ -47,6 +60,7 @@ function makeTable(x,y){
 	}
 };
 
+//체크
 function check(xData,yData,thisCell){
 	console.log("check().......");
 	var xData = parseInt(xData);
@@ -69,7 +83,9 @@ function check(xData,yData,thisCell){
 	}
 };
 
+//색깔바꾸기
 function change(thisCell){
 	$(".current").removeClass("current");
 	thisCell.addClass("current");
 }
+
